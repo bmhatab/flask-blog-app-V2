@@ -1,0 +1,43 @@
+{% extends 'base_user.html' %}
+
+{% block title %} Post {% endblock %}
+
+
+{% block main %}
+<div class="container">
+
+    <!--This loops through the flash message -->
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <div class="card text-center">
+            <div class="card-header">
+                Blog Posts...
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <hr>
+              <p class="card-text">{{post.poster.name}}</br>{{post.slug}}</br>{{post.content}}</p>
+              <a href="{{url_for('main.posts')}}" class="btn btn-primary">Back to Blog</a>
+              {% if post.poster_id == current_user.id %}
+              <a class="btn btn-outline-secondary" href="{{url_for('main.edit_post', id=post.id)}}">Edit Post</a>
+              <a class="btn btn-outline-danger" href="{{url_for('main.delete_post', id=post.id)}}">Delete Post</a>
+              {% endif %}
+            </div>
+            <div class="card-footer text-muted">
+                {{post.date_posted}}
+            </div>
+        </div>
+    </div>
+        
+
+
+
+
+{% endblock %}

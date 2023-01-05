@@ -1,0 +1,78 @@
+{% extends 'base_user.html' %}
+
+{% block title %} NAMES {% endblock %}
+
+
+{% block main %}
+<div class="container">
+
+<!--This loops through the flash message -->
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    {% if name %}
+        <h1>Hello {{name}} </h1> 
+
+    {% else %}
+        <h1>User Register </h1> 
+        <br/>
+        <div class="shadow p-3 mb-5 bg-body rounded">
+            <form method="post">
+                {{form.hidden_tag()}} <!--This creates our csrf token -->
+                {{form.name.label(class="form-label")}}
+                {{form.name(class="form-control")}}
+                {{form.email.label(class="form-label")}}
+                {{form.email(class="form-control")}}
+                {{form.password_hash.label(class="form-label")}}
+                {{form.password_hash(class="form-control")}}
+                {{form.password_hash_v.label(class="form-label")}}
+                {{form.password_hash_v(class="form-control")}}
+                <br/>
+                {{form.submit(class="btn btn-primary")}} 
+            </form>
+        </div>
+    </div>
+
+    {% endif %}
+
+     
+<div class="container">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col"> Hashed Password</th>
+            </tr>
+        </thead>
+      
+        <tbody>
+    {% for our_user in our_users %} 
+            <tr>
+            <th scope="row">{{our_user.id}}</th>
+            <td><a href="{{url_for('main.update', id=our_user.id)}}">{{our_user.name}}</a></td>
+            <td>{{our_user.password_hash}} - <a href="{{url_for('main.delete', id=our_user.id)}}">Delete</a></td>
+            </tr>
+    {% endfor %}
+        </tbody>     
+                
+   
+    </table>
+</div>   
+
+    
+    
+            
+            
+            
+        
+
+</div>
+
+
+
+{% endblock %}
