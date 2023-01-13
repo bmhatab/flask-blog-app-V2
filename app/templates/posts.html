@@ -17,7 +17,7 @@
 
 <h1>Blog Posts...</h1>
 
-    {% for post in posts %}
+    {% for post, formatted_time in zip(posts, formatted_times) %}
     <div class="shadow p-3 mb-5 bg-body rounded">
         <div class="card text-center">
             <div class="card-header">
@@ -34,7 +34,7 @@
               {% endif %}
             </div>
             <div class="card-footer text-muted">
-                {{post.date_posted}}
+                {{formatted_time}}
             </div>
           </div>
     </div>

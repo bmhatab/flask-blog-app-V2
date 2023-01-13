@@ -1,0 +1,78 @@
+
+
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    background-image: url('serendi_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (min-width: 700px) {
+    body {
+        background-image: url('serendi_bg_large.jpg');
+    }
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Blog post styling */
+main {
+    padding: 20px;
+}
+
+article {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+article h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+article p {
+    margin: 10px 0;
+}
+
+article p:first-of-type {
+    font-weight: bold;
+}
+
+/* Footer styling */
+footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    
+}
+
+.container-fluid-options {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+
+}

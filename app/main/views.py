@@ -6,13 +6,17 @@ from ..models import Users,Posts
 from flask import Flask, render_template,flash,request,redirect,url_for,session
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin,login_user,LoginManager,login_required,logout_user,current_user
+from itertools import zip_longest
 
 
 
 
 @main.route('/')
 def index():
-    return render_template("base_index.html")
+    posts = Posts.query.order_by(Posts.date_posted).all()
+    post_dates = [post.date_posted for post in posts]
+    formatted_times = [date.strftime("%A, %B %d %Y") for date in post_dates]
+    return render_template("base_index.html",posts=posts,formatted_times=formatted_times,zip=zip)
 
 @main.route('/user/<name>')
 def user(name):
@@ -96,14 +100,19 @@ def add_post():
 @main.route('/posts')
 @login_required
 def posts():
-    posts = Posts.query.order_by(Posts.date_posted)
-    return render_template("posts.html",posts=posts)
+    posts = Posts.query.order_by(Posts.date_posted).all()
+    post_dates = [post.date_posted for post in posts]
+    formatted_times = [date.strftime("%A, %B %d %Y") for date in post_dates]
+    return render_template("posts.html",posts=posts,formatted_times=formatted_times,zip=zip)
+    
 
 @main.route('/post/<int:id>')
 @login_required
 def post(id):
     post = Posts.query.get_or_404(id)
-    return render_template('post.html', post=post)
+    post_date = post.date_posted
+    formatted_time = [date.strftime("%A, %B %d %Y") for date in post_date]
+    return render_template('post.html', post=post, formatted_time=formatted_time)
 
 
 @main.route('/post/delete/<int:id>')
