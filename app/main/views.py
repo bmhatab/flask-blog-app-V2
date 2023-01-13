@@ -59,7 +59,11 @@ def login():
 @main.route('/dashboard', methods=["GET","POST"])
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    user = current_user
+    user_date = [user.date_added]
+    formatted_time = [date.strftime("%A, %B %d %Y") for date in user_date]
+    return render_template("dashboard.html", user=user, formatted_time=formatted_time[0])
+
 
 @main.route('/logout', methods=["GET","POST"])
 @login_required
@@ -110,9 +114,9 @@ def posts():
 @login_required
 def post(id):
     post = Posts.query.get_or_404(id)
-    post_date = post.date_posted
-    formatted_time = [date.strftime("%A, %B %d %Y") for date in post_date]
-    return render_template('post.html', post=post, formatted_time=formatted_time)
+    post_dates = [post.date_posted for post in posts]
+    formatted_times = [date.strftime("%A, %B %d %Y") for date in post_dates]
+    return render_template("post.html",posts=posts,formatted_times=formatted_times,zip=zip)
 
 
 @main.route('/post/delete/<int:id>')
