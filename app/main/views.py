@@ -114,9 +114,9 @@ def posts():
 @login_required
 def post(id):
     post = Posts.query.get_or_404(id)
-    post_dates = [post.date_posted for post in posts]
-    formatted_times = [date.strftime("%A, %B %d %Y") for date in post_dates]
-    return render_template("post.html",posts=posts,formatted_times=formatted_times,zip=zip)
+    post_date = [post.date_posted]
+    formatted_time = [date.strftime("%A, %B %d %Y") for date in post_date]
+    return render_template("post.html",post=post,formatted_time=formatted_time[0],zip=zip)
 
 
 @main.route('/post/delete/<int:id>')

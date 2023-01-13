@@ -24,8 +24,8 @@ def create_app():
     from app.main import main
     from app.models import Users, Posts
     app.register_blueprint(main)
-    #with app.app_context():
-       # db.create_all()
+    with app.app_context():
+        db.create_all()
 
     @login_manager.user_loader
     def load_user(id):
