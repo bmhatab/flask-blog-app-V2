@@ -193,6 +193,7 @@ def add_user():
         form.email.data = ''
         form.password_hash.data = ''
         flash("User Added Sucessfully")
+        return redirect(url_for("main.login"))
     #To display user names on the page 
     our_users = Users.query.order_by(Users.date_added)   
     return render_template('add_user.html',form=form,name=name,our_users=our_users)
