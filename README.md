@@ -1,4 +1,4 @@
-#Welcome to the Flask Blog App</h1>
+##Welcome to the Flask Blog App</h1>
 
 <p>This app is a simple blogging platform built using the Flask framework. It allows users to create an account, log in, create posts, view other users' posts, edit their own posts, and edit their personal profiles. The app also utilizes encryption to securely store user password hashes in the database, rather than storing the actual passwords.</p>
 
